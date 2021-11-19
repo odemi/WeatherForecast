@@ -1,0 +1,24 @@
+<template>
+        <div style="width: 30%">
+            <lightning-input type="text" placeholder="Search for location..." onchange={handleChange} style="margin:5px"></lightning-input>
+            <lightning-button label="Search" variant="brand" onclick={handleSearch} style="margin:5px"></lightning-button>
+        </div>
+        <template if:true={showForecast}>
+            <p style="width: 30%; margin: auto"><b>Weather in {cityName}</b></p>
+            <div style="display: flex; flex-direction: row">
+                <template for:each={weatherData} for:item="item">
+                    <div key={item.weatherDate} style="margin: 15px; padding: 15px">
+                        <p>{item.weatherDate}</p>
+                        <p>Average temperature: {item.averageTemp}℃</p>
+                        <p>Precipitation: {item.precipitation}mm</p>
+                        <p>Chance of rain: {item.chanceOfRain}%</p>
+                        <p>Chance of snow: {item.chanceOfSnow}%</p>
+                        <img src={item.icon}>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showError}>
+            <p>Sorry, we could not find the entered location, try again</p>
+        </template>
+</template>
